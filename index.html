@@ -3,10 +3,33 @@
 <head>
     <script src="minst.js"></script>
     <script>
-        jsonDown("Cj722-esYa6/");
+        //jsonDown("Cj722-esYa6/");
+
+        var queryString = location.search
+        let params = new URLSearchParams(queryString)
+        // example of retrieving 'id' parameter
+        let getCode = parseInt(params.get("code"))
+        console.log("inst code:"+getCode);
+
+        if (getCode){
+            console.log("Code find:");
+            const form = new FormData();
+            form.append('client_id', '3322689614633695');
+            form.append('client_secret', '8bcb0f9a82dec00f977c1a3e2d17d5b6');
+            form.append('grant_type', 'authorization_code');
+            form.append('redirect_uri', 'https://kotovmt.github.io/minst.github.io/');
+            form.append('code', getCode);
+
+            fetch('https://api.instagram.com/oauth/access_token', {
+                method: 'POST',
+                body: form
+            });            
+        }
+
+
     </script>
 </head>
 <body>
-<h1>Hello World 0.1</h1>
+<h1>Hello World 0.2</h1>
 </body>
 </html>
